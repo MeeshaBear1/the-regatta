@@ -15,10 +15,15 @@ const COLLECTIONS = {
   'worlds-waters': { title: 'The World’s Waters', tag: 'CH. 07', sub: 'The masterworks, worldwide.', desc: 'Van de Velde’s calms, Turner’s weather, Aivazovsky’s ninth waves, Hokusai’s troughs — the global apex of marine art, from the museums’ open programs.' },
 };
 const ERAS = { 'golden-age': 'Golden Age', 'clipper': 'Clipper Era', 'victorian-cup': 'Victorian Cup', 'gilded': 'Gilded Age', 'edwardian': 'Edwardian', 'j-class-1930': 'J-Class 1930' };
+// [name, size, price, note] — first three are atelier print-on-demand
+// (Prodigi/Printful; priced at 2× the Painted Whiskers giclée card),
+// last two are bespoke local-printer work at the $5,000+ point.
 const TIERS = [
-  ['Cabin', '18 × 24 in', '$1,200'],
-  ['Saloon', '30 × 40 in', '$2,900'],
-  ['Clubhouse', '45 × 60 in', '$6,800'],
+  ['Tender', '12 × 16 in', '$98', 'archival giclée, cotton rag · atelier printed, ships within the week'],
+  ['Cutter', '18 × 24 in', '$198', 'archival giclée, cotton rag · atelier printed, ships within the week'],
+  ['Sloop', '24 × 36 in', '$358', 'archival giclée, cotton rag · atelier printed, ships within the week'],
+  ['Saloon', '30 × 40 in', '$5,400', 'bespoke — proofed and printed by our master printer, framed to order'],
+  ['Clubhouse', '45 × 60 in', '$9,800', 'bespoke — proofed and printed by our master printer, framed to order'],
 ];
 
 const esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -248,10 +253,10 @@ function piecePage(p) {
         </div>
         <hr class="rule">
         <div class="ladder" role="group" aria-label="Print sizes">
-          ${TIERS.map(([n, sz, pr], i) => `<div class="tier" role="button" tabindex="0" aria-pressed="${i === 1}" data-tier="${n}" data-price="${pr}"><span><strong>${n}</strong> · ${sz} · museum giclée, archival rag</span><span class="price">${pr}</span></div>`).join('')}
+          ${TIERS.map(([n, sz, pr, note], i) => `<div class="tier" role="button" tabindex="0" aria-pressed="${i === 1}" data-tier="${n}" data-price="${pr}"><span><strong>${n}</strong> · ${sz} · ${note}</span><span class="price">${pr}</span></div>`).join('')}
         </div>
         <button class="btn solid" data-add-folio="${p.slug}" data-title="${esc(p.title)}">Enter it in the folio</button>
-        <p style="font-size:.85rem;opacity:.7;margin-top:1rem">Acquisition is by enquiry. Oversized statement marines ship first-class, framed to order. <strong>THE FLEET</strong> — three matched pieces from one wing — $7,500.</p>
+        <p style="font-size:.85rem;opacity:.7;margin-top:1rem">Tender through Sloop are printed to order by our ateliers and ship within the week. Saloon and Clubhouse are bespoke — proofed, printed, and framed by hand, by enquiry. <strong>THE FLEET</strong> — three matched pieces from one wing, at Saloon scale — $13,500.</p>
         <p style="font-size:.85rem;opacity:.7;margin-top:.6rem">Gifting: the launch, the first command, the crossing.${p.personalization?.eligible ? ' This piece takes a dedication plate — title-swap personalization at commission.' : ''}</p>
       </div>
     </div>
@@ -264,7 +269,7 @@ function piecePage(p) {
     jsonld: {
       '@context': 'https://schema.org', '@type': 'VisualArtwork', name: p.title, creator: p.artist,
       dateCreated: p.date, artMedium: p.medium, image: p.imageUrl,
-      offers: { '@type': 'AggregateOffer', priceCurrency: 'USD', lowPrice: '1200', highPrice: '6800' }
+      offers: { '@type': 'AggregateOffer', priceCurrency: 'USD', lowPrice: '98', highPrice: '9800' }
     }
   });
 }

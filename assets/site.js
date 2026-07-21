@@ -123,7 +123,7 @@
     btn.addEventListener('click', function () {
       var tierEl = document.querySelector('.tier[aria-pressed="true"]');
       var f = folio();
-      f.push({ slug: btn.dataset.addFolio, title: btn.dataset.title, tier: tierEl ? tierEl.dataset.tier : 'Saloon', price: tierEl ? tierEl.dataset.price : '' });
+      f.push({ slug: btn.dataset.addFolio, title: btn.dataset.title, tier: tierEl ? tierEl.dataset.tier : 'Cutter', price: tierEl ? tierEl.dataset.price : '' });
       saveFolio(f); toast('Entered in the folio');
     });
   });

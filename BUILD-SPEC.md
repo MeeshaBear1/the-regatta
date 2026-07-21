@@ -75,7 +75,9 @@ Armorial honesty rule). No stock, no placeholders.
 
 ## Commerce
 
-Ladder (priced high — the buyer owns the boat): Cabin 18×24″ **$1,200** · Saloon 30×40″
-**$2,900** · Clubhouse 45×60″ **$6,800**. THE FLEET (three matched) **$7,500**. THE CLUBHOUSE
+Ladder (two-track, rev 2026-07-20): aspirational atelier POD (Prodigi/Printful, priced at
+2× the Painted Whiskers giclée card) — Tender 12×16″ **$98** · Cutter 18×24″ **$198** ·
+Sloop 24×36″ **$358**; bespoke local master printer & framer — Saloon 30×40″ **$5,400** ·
+Clubhouse 45×60″ **$9,800**. THE FLEET (three matched, Saloon scale) **$13,500**. THE CLUBHOUSE
 trade program (clubs, marinas, coastal hotels). THE BURGEE commission from **$1,400**, free
 preview. Acquisition by enquiry (Folio → enquiry), no payment rails at launch.
