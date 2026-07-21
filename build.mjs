@@ -14,7 +14,7 @@ const COLLECTIONS = {
   '1930-season': { title: 'The 1930 Season', tag: 'CH. 06 · JUST OPENED', sub: 'The first J-class summer — cleared January 2026.', desc: 'The Cup’s towering modern era opening off Newport, in the season’s own press plates. Published 1930, public domain in the US as of January 2026 — the portfolio’s newest unlock afloat.' },
   'worlds-waters': { title: 'The World’s Waters', tag: 'CH. 07', sub: 'The masterworks, worldwide.', desc: 'Van de Velde’s calms, Turner’s weather, Aivazovsky’s ninth waves, Hokusai’s troughs — the global apex of marine art, from the museums’ open programs.' },
 };
-const ERAS = { 'golden-age': 'Golden Age', 'clipper': 'Clipper Era', 'victorian-cup': 'Victorian Cup', 'edwardian': 'Edwardian', 'j-class-1930': 'J-Class 1930' };
+const ERAS = { 'golden-age': 'Golden Age', 'clipper': 'Clipper Era', 'victorian-cup': 'Victorian Cup', 'gilded': 'Gilded Age', 'edwardian': 'Edwardian', 'j-class-1930': 'J-Class 1930' };
 const TIERS = [
   ['Cabin', '18 × 24 in', '$1,200'],
   ['Saloon', '30 × 40 in', '$2,900'],
@@ -34,7 +34,7 @@ const FLAGS = [
   '<svg viewBox="0 0 14 10"><path d="M0,0 H14 L10,5 L14,10 H0 Z" fill="#F7F3EA"/><path d="M7,0 H14 L10,5 L14,10 H7 Z" fill="#1F4E79"/></svg>',
 ];
 
-function layout({ title, desc, body, root, night = false, jsonld = null, active = '' }) {
+function layout({ title, desc, body, root, night = false, jsonld = null, active = '', preload = null }) {
   const nav = [['gallery/', 'Gallery'], ['the-burgee/', 'The Burgee'], ['craft/', 'Craft'], ['about/', 'About']]
     .map(([h, t]) => `<a href="${root}${h}"${active === t ? ' aria-current="page"' : ''}>${t}</a>`).join('');
   return `<!doctype html>
@@ -48,12 +48,14 @@ function layout({ title, desc, body, root, night = false, jsonld = null, active 
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=Hanken+Grotesk:wght@300..600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${root}assets/site.css">
 <link rel="icon" href="data:image/svg+xml,${encodeURIComponent(FLAGS[0])}">
+${preload ? `<link rel="preload" as="image" href="${esc(preload)}">` : ''}
 ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld)}</script>` : ''}
 </head>
 <body${night ? '' : ' class="light-hdr"'}>
 <header class="hdr"><div class="bar">
-  <nav class="primary" aria-label="Primary">${nav}</nav>
-  <a class="wordmark" href="${root}">THE REGATTA</a>
+  <button class="menu-btn" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+  <nav class="primary" id="primary-nav" aria-label="Primary">${nav}</nav>
+  <a class="wordmark" href="${root || './'}">THE REGATTA</a>
   <nav aria-label="Folio"><a href="${root}checkout/">The Folio <span id="folio-count"></span></a></nav>
 </div></header>
 <main>
@@ -151,7 +153,7 @@ function indexPage() {
   </div>
 </section>`;
   return layout({
-    title: 'The Regatta — Museum-Grade Prints of the Age of Sail', root, night: true, active: '',
+    title: 'The Regatta — Museum-Grade Prints of the Age of Sail', root, night: true, active: '', preload: hero.imageUrl,
     desc: 'Clipper lithographs, the Cup’s first century, luminist marines, ship portraits, and the newly unlocked 1930 J-class season. Museum-grade prints, rights-researched.',
     body, jsonld: { '@context': 'https://schema.org', '@type': 'Organization', name: 'The Regatta', description: 'Museum-grade prints of the age of sail.' }
   });
@@ -164,7 +166,7 @@ function galleryPage() {
   const body = `
 <section style="padding-top:9rem">
   <div class="wrap">
-    <div class="sec-head"><h2>The Gallery</h2><span class="mono">Every wing, one wall</span></div><hr class="rule">
+    <div class="sec-head"><h1>The Gallery</h1><span class="mono">Every wing, one wall</span></div><hr class="rule">
     <div class="filters">
       <select id="f-collection" aria-label="Collection"><option value="">All collections</option>${Object.entries(COLLECTIONS).map(([s, c]) => `<option value="${s}">${c.title}</option>`).join('')}</select>
       <select id="f-era" aria-label="Era"><option value="">All eras</option>${Object.entries(ERAS).map(([s, t]) => `<option value="${s}">${t}</option>`).join('')}</select>
@@ -193,7 +195,7 @@ function collectionPage(slug) {
 <section style="padding-top:9rem">
   <div class="wrap">
     <span class="kicker mono" style="color:var(--brass)">${esc(c.tag)}</span>
-    <div class="sec-head"><h2>${c.title}</h2><span class="mono">${pieces.length} pieces</span></div>
+    <div class="sec-head"><h1>${c.title}</h1><span class="mono">${pieces.length} pieces</span></div>
     <hr class="rule">
     <p class="reveal" style="max-width:62ch;margin-bottom:1rem">${c.desc}</p>${doctrine}
     <div class="grid stagger" style="margin-top:3rem">${pieces.map(p => pieceCard(p, root)).join('')}</div>
@@ -274,7 +276,7 @@ function burgeePage() {
 <section style="padding-top:9rem">
   <div class="wrap">
     <span class="kicker mono" style="color:var(--brass)">The Commission · Free preview</span>
-    <div class="sec-head"><h2>THE BURGEE</h2><span class="mono">From $1,400 · chart-plate rendering</span></div>
+    <div class="sec-head"><h1>THE BURGEE</h1><span class="mono">From $1,400 · chart-plate rendering</span></div>
     <hr class="rule">
     <p class="reveal" style="max-width:62ch;margin-bottom:2.5rem">The family’s private signal, designed as an original: your burgee and optional boat-name plate rendered in period chart-plate style, alongside the international code the whole tradition descends from. “THE REYES PRIVATE SIGNAL · FIRST HOISTED 2026.”</p>
     <div class="burgee-lab">
@@ -361,7 +363,7 @@ function checkoutPage() {
   const body = `
 <section style="padding-top:9rem;min-height:70vh">
   <div class="wrap" style="max-width:820px">
-    <div class="sec-head"><h2>The Folio</h2><span class="mono">Acquisition by enquiry</span></div>
+    <div class="sec-head"><h1>The Folio</h1><span class="mono">Acquisition by enquiry</span></div>
     <hr class="rule">
     <div id="folio-list" class="ladder"></div>
     <p style="margin:2rem 0"><a class="btn solid" id="enquire" href="mailto:acquisitions@theregatta.gallery">Send the enquiry</a></p>

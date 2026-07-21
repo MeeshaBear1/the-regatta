@@ -8,6 +8,13 @@
   function onScrollHdr() { hdr && hdr.classList.toggle('scrolled', scrollY > 40); }
   addEventListener('scroll', onScrollHdr, { passive: true }); onScrollHdr();
 
+  /* mobile disclosure menu */
+  var mbtn = document.querySelector('.menu-btn');
+  if (mbtn) mbtn.addEventListener('click', function () {
+    var open = hdr.classList.toggle('menu-open');
+    mbtn.setAttribute('aria-expanded', open);
+  });
+
   /* scroll progress --sp (drives #1 parallax, #6 ken burns, #8 signal hoist) */
   var flags = [].slice.call(document.querySelectorAll('.hoist svg'));
   var ticking = false;
@@ -85,6 +92,7 @@
     }
     function close() { zoomer.classList.remove('open'); document.body.style.overflow = ''; }
     art.addEventListener('click', open);
+    art.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
     zoomer.querySelector('.close').addEventListener('click', function (e) { e.stopPropagation(); close(); });
     addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
     zoomer.addEventListener('wheel', function (e) {
@@ -120,10 +128,12 @@
     });
   });
   document.querySelectorAll('.tier').forEach(function (t) {
-    t.addEventListener('click', function () {
+    function pick() {
       document.querySelectorAll('.tier').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
       t.setAttribute('aria-pressed', 'true');
-    });
+    }
+    t.addEventListener('click', pick);
+    t.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } });
   });
   var flist = document.getElementById('folio-list');
   if (flist) {

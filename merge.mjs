@@ -15,6 +15,11 @@ for (const f of files) {
     if (/beken|rosenfeld/.test(credit)) { dropped.push([f, p.slug, 'licensed named archive — sign-off-or-shelve']); continue; }
     if (p.figure && !p.publicityStatus) { dropped.push([f, p.slug, 'figure without publicityStatus']); continue; }
     p.publicityStatus = p.publicityStatus || 'clear';
+    // honesty rule: the 1930 wing holds only genuine 1930 record — earlier
+    // big-class backfill (1914-20 Bain plates) belongs to the Edwardian wing
+    if (p.collection === '1930-season' && !/1930/.test(String(p.date))) {
+      p.collection = 'edwardian-racers'; p.era = 'edwardian';
+    }
     all.push(p);
   }
 }

@@ -1,7 +1,7 @@
 /* THE REGATTA — chart table at dawn. Roles: paper/ink/night/brass/signal. */
 :root{
   --paper:#F7F3EA; --ink:#14232E; --night:#081820; --night-ink:#E9E2D2;
-  --brass:#A07C3F; --brass-bright:#C09A55; --signal-red:#A93226; --signal-blue:#1F4E79;
+  --brass:#7D602F; --brass-bright:#C09A55; --signal-red:#A93226; --signal-blue:#1F4E79;
   --line:rgba(20,35,46,.16); --line-night:rgba(233,226,210,.18);
   --font-display:"Fraunces",Georgia,serif; --font-text:"Hanken Grotesk",system-ui,sans-serif;
   --font-mono:"IBM Plex Mono",ui-monospace,monospace;
@@ -37,7 +37,19 @@ main{position:relative;z-index:2}
   padding:.35rem 0;border-bottom:1px solid transparent}
 .hdr nav a:hover,.hdr nav a[aria-current]{border-bottom-color:currentColor}
 body.light-hdr .hdr:not(.scrolled){color:var(--ink)}
-@media(max-width:760px){.hdr nav.primary{display:none}}
+.hdr .bar>nav{flex:1;display:flex}
+.hdr .bar>nav:last-child{justify-content:flex-end}
+.menu-btn{display:none;background:none;border:1px solid currentColor;color:inherit;
+  font-family:var(--font-mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
+  padding:.5rem .8rem;cursor:pointer}
+@media(max-width:760px){
+  .hdr nav.primary{display:none}
+  .menu-btn{display:block;flex:1;max-width:5.2rem}
+  .hdr.menu-open{background:var(--paper);color:var(--ink);border-color:var(--line)}
+  .hdr.menu-open nav.primary{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;
+    background:var(--paper);color:var(--ink);border-bottom:1px solid var(--line);
+    padding:.8rem clamp(1.25rem,4vw,3.5rem) 1.2rem;gap:.4rem}
+}
 
 /* ---------- signal-hoist progress rail (#8) ---------- */
 .hoist{position:fixed;right:clamp(.6rem,1.6vw,1.6rem);top:50%;translate:0 -50%;z-index:40;
@@ -78,7 +90,7 @@ section{padding:clamp(4rem,9vw,8rem) 0;position:relative}
 .night ::selection{background:var(--brass)}
 .sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:2rem;
   margin-bottom:clamp(2rem,4vw,3.5rem);flex-wrap:wrap}
-.sec-head h2{font-size:clamp(2rem,4.5vw,3.6rem)}
+.sec-head h1,.sec-head h2{font-size:clamp(2rem,4.5vw,3.6rem)}
 .rule{height:1px;background:var(--line);border:0;margin:0 0 clamp(2rem,4vw,3rem);
   transform-origin:left;transform:scaleX(0)}
 .night .rule{background:var(--line-night)}
