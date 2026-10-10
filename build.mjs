@@ -11,19 +11,19 @@ const COLLECTIONS = {
   'luminists': { title: 'The Luminists', tag: 'CH. 03', sub: 'Light on water as the entire subject.', desc: 'Lane’s glassy harbors and the American luminists: not the race, the stillness after.' },
   'ship-portraits': { title: 'The Ship Portraits', tag: 'CH. 04', sub: 'The vessel as sitter.', desc: 'Jacobsen’s harbor-portrait industry and the pierhead painters — the fleet’s family photographers, one broadside sitting at a time.' },
   'edwardian-racers': { title: 'The Edwardian Racers', tag: 'CH. 05', sub: 'Grace, at industrial scale.', desc: 'The big-class era in period photography and print — the seasons when kings raced kings, in the anonymous press record.' },
-  '1930-season': { title: 'The 1930 Season', tag: 'CH. 06 · JUST OPENED', sub: 'The first J-class summer — cleared January 2026.', desc: 'The Cup’s towering modern era opening off Newport, in the season’s own press plates. Published 1930, public domain in the US as of January 2026 — the portfolio’s newest unlock afloat.' },
-  'worlds-waters': { title: 'The World’s Waters', tag: 'CH. 07', sub: 'The masterworks, worldwide.', desc: 'Van de Velde’s calms, Turner’s weather, Aivazovsky’s ninth waves, Hokusai’s troughs — the global apex of marine art, from the museums’ open programs.' },
+  '1930-season': { title: 'The 1930 Season', tag: 'CH. 06 · JUST OPENED', sub: 'The first J-class summer — cleared January 2026.', desc: 'The Cup’s towering modern era opening off Newport, in the season’s own press plates. Published 1930, public domain in the US as of January 2026.' },
+  'worlds-waters': { title: 'The World’s Waters', tag: 'CH. 07', sub: 'The masterworks, worldwide.', desc: 'Van de Velde’s calms, Turner’s weather, Aivazovsky’s ninth waves, Hokusai’s troughs, from the museums’ open-access collections.' },
 };
 const ERAS = { 'golden-age': 'Golden Age', 'clipper': 'Clipper Era', 'victorian-cup': 'Victorian Cup', 'gilded': 'Gilded Age', 'edwardian': 'Edwardian', 'j-class-1930': 'J-Class 1930' };
 // [name, size, price, note] — first three are atelier print-on-demand
 // (Prodigi/Printful; priced at 2× the Painted Whiskers giclée card),
 // last two are bespoke local-printer work at the $5,000+ point.
 const TIERS = [
-  ['Tender', '12 × 16 in', '$98', 'archival giclée, cotton rag · atelier printed, ships within the week'],
-  ['Cutter', '18 × 24 in', '$198', 'archival giclée, cotton rag · atelier printed, ships within the week'],
-  ['Sloop', '24 × 36 in', '$358', 'archival giclée, cotton rag · atelier printed, ships within the week'],
-  ['Saloon', '30 × 40 in', '$5,400', 'bespoke — proofed and printed by our master printer, framed to order'],
-  ['Clubhouse', '45 × 60 in', '$9,800', 'bespoke — proofed and printed by our master printer, framed to order'],
+  ['Tender', '12 × 16 in', '$98', 'paper print · made to order'],
+  ['Cutter', '18 × 24 in', '$198', 'paper print · made to order'],
+  ['Sloop', '24 × 36 in', '$358', 'paper print · made to order'],
+  ['Saloon', '30 × 40 in', '$5,400', 'printed and framed to order · details by enquiry'],
+  ['Clubhouse', '45 × 60 in', '$9,800', 'printed and framed to order · details by enquiry'],
 ];
 
 const esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -70,7 +70,7 @@ ${body}
 <div class="toast" role="status" aria-live="polite"></div>
 <footer><div class="wrap">
   <div class="cols">
-    <div><h4>The Regatta</h4><p style="max-width:34ch;font-size:.92rem;opacity:.85">Museum-grade prints of the age of sail, at leisure and at speed. The sea has always kept a society page.</p></div>
+    <div><h4>The Regatta</h4><p style="max-width:34ch;font-size:.92rem;opacity:.85">Prints of the age of sail, each one linked to the record of the institution that holds it. The sea has always kept a society page.</p></div>
     <div><h4>Collections</h4><ul>${Object.entries(COLLECTIONS).map(([s, c]) => `<li><a href="${root}collections/${s}/">${c.title}</a></li>`).join('')}</ul></div>
     <div><h4>The House</h4><ul><li><a href="${root}the-burgee/">The Burgee — commission</a></li><li><a href="${root}craft/">Canvas and Stone</a></li><li><a href="${root}about/">About &amp; doctrine</a></li><li><a href="${root}checkout/">The Folio</a></li></ul></div>
     <div><h4>Programs</h4><ul><li>The Fleet — three matched pieces</li><li>The Clubhouse — trade tier</li><li>Gifting: the launch, the first command, the crossing</li></ul></div>
@@ -110,9 +110,9 @@ function indexPage() {
   <div class="wrap">
     <span class="kicker mono">Ch. I — Dawn Harbor</span>
     <h1>THE REGATTA</h1>
-    <p class="tag">Museum-grade prints of the age of sail, at leisure and at speed. The sea has always kept a society page.</p>
+    <p class="tag">Prints of the age of sail, at leisure and at speed, from the clipper lithographs to the 1930 J-class summer. The sea has always kept a society page.</p>
     <a class="btn solid" href="${root}gallery/">Enter the gallery</a>
-    <a class="btn" style="margin-left:.6rem" href="${root}collections/1930-season/">The 1930 unlock</a>
+    <a class="btn" style="margin-left:.6rem" href="${root}collections/1930-season/">The 1930 season</a>
   </div>
 </div>
 
@@ -121,7 +121,7 @@ function indexPage() {
     <span class="kicker mono">Ch. II — The Gun · Just opened</span>
     <div class="sec-head"><h2>The first J-class summer, 1930</h2></div>
     <hr class="rule">
-    <p class="reveal" style="max-width:62ch;margin-bottom:2.5rem">Published 1930, public domain in the United States as of January 2026 — the Cup’s towering modern era opens off Newport in the season’s own press plates, sold as the history it is. The rest of the J-class decade stands on the watch list, unlocking annually from January 2027.</p>
+    <p class="reveal" style="max-width:62ch;margin-bottom:2.5rem">Published 1930, public domain in the United States as of January 2026 — the Cup’s towering modern era opens off Newport in the season’s own press plates, sold as the history it is. The rest of the J-class decade stands on the watch list, clearing one year at a time from January 2027.</p>
     <div class="grid stagger">${wing1930.map(p => pieceCard(p, root)).join('')}</div>
     <p class="reveal" style="margin-top:2.5rem"><a class="btn" href="${root}collections/1930-season/">Enter the 1930 wing</a></p>
   </div>
@@ -146,7 +146,7 @@ function indexPage() {
     <div class="reveal">
       <span class="kicker mono" style="color:var(--brass)">The Commission</span>
       <h2 style="font-size:clamp(1.8rem,3.5vw,2.8rem);margin-bottom:1rem">THE BURGEE</h2>
-      <p style="max-width:48ch">Your private signal, designed as an original and rendered in period chart-plate style — burgee and optional boat-name plate. Free preview; the sea spells slowly, and means it.</p>
+      <p style="max-width:48ch">A private signal for your boat or your family, drawn as an original in period chart-plate style, with an optional boat-name plate. Free preview; the sea spells slowly, and means it.</p>
       <p style="margin-top:1.5rem"><a class="btn solid" href="${root}the-burgee/">Design your signal</a></p>
     </div>
     <div class="reveal">
@@ -158,9 +158,9 @@ function indexPage() {
   </div>
 </section>`;
   return layout({
-    title: 'The Regatta — Museum-Grade Prints of the Age of Sail', root, night: true, active: '', preload: hero.imageUrl,
-    desc: 'Clipper lithographs, the Cup’s first century, luminist marines, ship portraits, and the newly unlocked 1930 J-class season. Museum-grade prints, rights-researched.',
-    body, jsonld: { '@context': 'https://schema.org', '@type': 'Organization', name: 'The Regatta', description: 'Museum-grade prints of the age of sail.' }
+    title: 'The Regatta — Prints of the Age of Sail', root, night: true, active: '', preload: hero.imageUrl,
+    desc: 'Clipper lithographs, the Cup’s first century, luminist marines, ship portraits, and the 1930 J-class season, public domain since January 2026. Every print links to its source record.',
+    body, jsonld: { '@context': 'https://schema.org', '@type': 'Organization', name: 'The Regatta', description: 'Prints of the age of sail.' }
   });
 }
 
@@ -193,7 +193,7 @@ function collectionPage(slug) {
   const watch = slug === '1930-season' ? `
     <div class="plate reveal" style="margin-top:3.5rem;max-width:640px">
       <span class="mono" style="color:var(--brass)">Watch list</span>
-      <p style="margin-top:.6rem">The J-class decade, 1931 onward — Rainbow, Endeavour, Ranger — unlocks annually from January 2027 under the family’s pre-publication rule. The wing is wired; the wall waits.</p>
+      <p style="margin-top:.6rem">The J-class decade, 1931 onward — Rainbow, Endeavour, Ranger — clears one year at a time from January 2027 under the family’s pre-publication rule. The wing is built; the wall waits.</p>
     </div>` : '';
   const doctrine = slug === '1930-season' ? `<p class="reveal" style="max-width:62ch;opacity:.8;font-size:.92rem;margin-top:1rem">This wing runs on the anonymous press record. The celebrated marine-photography firms’ named archives are actively licensed — their work is sign-off-or-shelve, and the house shelves it.</p>` : '';
   const body = `
@@ -256,8 +256,8 @@ function piecePage(p) {
           ${TIERS.map(([n, sz, pr, note], i) => `<div class="tier" role="button" tabindex="0" aria-pressed="${i === 1}" data-tier="${n}" data-price="${pr}"><span><strong>${n}</strong> · ${sz} · ${note}</span><span class="price">${pr}</span></div>`).join('')}
         </div>
         <button class="btn solid" data-add-folio="${p.slug}" data-title="${esc(p.title)}">Enter it in the folio</button>
-        <p style="font-size:.85rem;opacity:.7;margin-top:1rem">Tender through Sloop are printed to order by our ateliers and ship within the week. Saloon and Clubhouse are bespoke — proofed, printed, and framed by hand, by enquiry. <strong>THE FLEET</strong> — three matched pieces from one wing, at Saloon scale — $13,500.</p>
-        <p style="font-size:.85rem;opacity:.7;margin-top:.6rem">Gifting: the launch, the first command, the crossing.${p.personalization?.eligible ? ' This piece takes a dedication plate — title-swap personalization at commission.' : ''}</p>
+        <p style="font-size:.85rem;opacity:.7;margin-top:1rem">Every size is acquired by enquiry: enter the piece in the folio and send it from there. Saloon and Clubhouse are framed to order. <strong>THE FLEET</strong> — three matched pieces from one wing, at Saloon scale — $13,500.</p>
+        <p style="font-size:.85rem;opacity:.7;margin-top:.6rem">Gifting: the launch, the first command, the crossing.${p.personalization?.eligible ? ' This piece can carry a dedication plate, added at commission.' : ''}</p>
       </div>
     </div>
     ${related.length ? `<div style="margin-top:5rem"><div class="sec-head"><h2 style="font-size:1.8rem">Same water</h2></div><div class="grid stagger">${related.map(x => pieceCard(x, root)).join('')}</div></div>` : ''}
@@ -328,13 +328,13 @@ function craftPage() {
       <h2 style="font-size:1.6rem;margin:2.5rem 0 1rem">The plate: how speed was photographed</h2>
       <p>By the Edwardian seasons the press boats went out with cameras, and the big cutters were finally caught rather than imagined. The halftone screen turned silver prints into newspaper plates — a mesh of dots that, at our print scale, reads like weather. The 1930 wing is made of exactly this record: the season’s own anonymous press plates, published 1930, public domain as of January 2026.</p>
       ${fig(photo, 'the press halftone')}
-      <h2 style="font-size:1.6rem;margin:2.5rem 0 1rem">Restoration doctrine</h2>
-      <p>The house cleans the record, never rewrites it. Dust, scratch, and scan artifacts are removed; tone is corrected to the period process; nothing is added, sharpened into invention, or “enhanced” past what the stone, canvas, or plate held. Speed drawn taller than truth stays taller than truth — that exaggeration is the artifact.</p>
+      <h2 style="font-size:1.6rem;margin:2.5rem 0 1rem">What the house leaves alone</h2>
+      <p>The image. Every picture here is the file the holding institution or Wikimedia Commons publishes, shown as it comes, with the record linked on its page. The house does not clean or retouch it. Speed drawn taller than truth stays taller than truth — that exaggeration is the artifact.</p>
       <p style="margin-top:2rem"><a class="btn solid" href="${root}gallery/">Enter the gallery</a></p>
     </div>
   </div>
 </section>`;
-  return layout({ title: 'Canvas and Stone — the craft — The Regatta', desc: 'Marine lithography, luminism, and how speed was drawn before it was photographed — the making of the house’s images, and the restoration doctrine.', body, root, active: 'Craft' });
+  return layout({ title: 'Canvas and Stone — the craft — The Regatta', desc: 'Marine lithography, luminism, and how speed was drawn before it was photographed — the making of these images, and what the house leaves alone.', body, root, active: 'Craft' });
 }
 
 /* ---------- about ---------- */
@@ -347,19 +347,19 @@ function aboutPage() {
     <h1 style="font-size:clamp(2.2rem,5vw,4rem);margin-bottom:2rem">About The Regatta</h1>
     <hr class="rule">
     <div class="story" style="font-size:1.05rem">
-      <p>The Regatta sells museum-grade prints of the age of sail at leisure and at speed — the clipper lithographs, the Cup’s first century, the luminist marines, the ship portraits — closing at the newly unlocked 1930 season. Every piece names its vessel, its builder or firm where known, and the water. One commission: THE BURGEE.</p>
+      <p>The Regatta sells prints of the age of sail at leisure and at speed — the clipper lithographs, the Cup’s first century, the luminist marines, the ship portraits — closing at the 1930 season, public domain since January 2026. Every piece names its artist or firm and its water; ${catalog.filter(p => p.vessel).length} of the ${catalog.length} name the vessel too. One commission: THE BURGEE.</p>
       <h2 style="font-size:1.5rem;margin:2.2rem 0 .8rem">The doctrine</h2>
-      <p><strong>Rights.</strong> Everything on these walls was created or published before 1931 and is public domain in the United States; the 1930 season cleared in January 2026 under that rule. Each piece carries its source institution and locator, verified at acquisition. The rest of the J-class decade unlocks annually from January 2027 — the watch list is wired.</p>
+      <p><strong>Rights.</strong> Everything on these walls was created or published before 1931 and is public domain in the United States; the 1930 season cleared in January 2026 under that rule. Each piece carries its source institution and locator, verified at acquisition. The rest of the J-class decade clears one year at a time from January 2027, and the watch list tracks it.</p>
       <p><strong>Marks.</strong> The historic Cup’s name and the great clubs’ burgees are held marks. They appear here only inside period artworks, as the historical documents they are — never as branding, and never in the Burgee commission, which the form itself refuses.</p>
       <p><strong>People.</strong> Victorian and Edwardian yachtsmen publish clean. Jazz Age figures with active estates carry a review flag, and the house honors it before any use beyond the historical record.</p>
       <p><strong>The named archives.</strong> The celebrated marine-photography firms’ archives are actively licensed. Their named work is sign-off-or-shelve; the house shelves it, and the 1930 wing runs on the anonymous press record instead.</p>
       <h2 style="font-size:1.5rem;margin:2.2rem 0 .8rem">The family</h2>
-      <p>The Regatta is a wing of the family portfolio — smaller than The Paddock, higher on the AOV. Next door: Cartographer’s Dream (the chart), Painted Earth (your home water as a period chart), The Links (the other blazer).</p>
+      <p>The Regatta is one house in a family of print houses. Next door: Cartographer’s Dream (the chart), Painted Earth (your home water as a period chart), The Links (the other blazer).</p>
       <p style="margin-top:2rem"><a class="btn solid" href="${root}gallery/">Enter the gallery</a></p>
     </div>
   </div>
 </section>`;
-  return layout({ title: 'About & doctrine — The Regatta', desc: 'The house, the rights doctrine, the marks doctrine, and the family — museum-grade prints of the age of sail.', body, root, active: 'About' });
+  return layout({ title: 'About & doctrine — The Regatta', desc: 'The house, the rights doctrine, the marks doctrine, and the family — prints of the age of sail.', body, root, active: 'About' });
 }
 
 /* ---------- checkout / folio ---------- */
@@ -372,10 +372,10 @@ function checkoutPage() {
     <hr class="rule">
     <div id="folio-list" class="ladder"></div>
     <p style="margin:2rem 0"><a class="btn solid" id="enquire" href="mailto:acquisitions@theregatta.gallery">Send the enquiry</a></p>
-    <p style="font-size:.9rem;opacity:.7;max-width:56ch">The house replies within two tides with framing options, shipping (oversized statement marines travel first-class), and — for THE CLUBHOUSE trade tier — the program terms for yacht clubs, marinas, and coastal hotels.</p>
+    <p style="font-size:.9rem;opacity:.7;max-width:56ch">The enquiry carries every piece and size in the folio. Ask about framing and shipping in the same note; yacht clubs, marinas and coastal hotels can ask for THE CLUBHOUSE trade tier.</p>
   </div>
 </section>`;
-  return layout({ title: 'The Folio — The Regatta', desc: 'Your selected pieces, ready for acquisition enquiry.', body, root });
+  return layout({ title: 'The Folio — The Regatta', desc: 'The pieces you have chosen, ready to send as one enquiry.', body, root });
 }
 
 /* ---------- emit ---------- */

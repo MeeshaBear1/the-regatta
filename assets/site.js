@@ -139,7 +139,7 @@
   if (flist) {
     function renderFolio() {
       var f = folio();
-      if (!f.length) { flist.innerHTML = '<p>The folio is empty. The gallery is not.</p>'; return; }
+      if (!f.length) { flist.innerHTML = '<p>The folio is empty. The gallery is not: <a href="../gallery/">choose a piece</a> and enter it here.</p>'; return; }
       flist.innerHTML = f.map(function (it, i) {
         return '<div class="tier"><span>' + it.title + ' — ' + it.tier + '</span><span class="price">' + it.price +
           ' <button class="btn" style="padding:.3rem .7rem" data-rm="' + i + '">Remove</button></span></div>';

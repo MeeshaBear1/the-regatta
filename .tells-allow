@@ -1,0 +1,3 @@
+# Literals the ai-tells lint flags that are code, not copy.
+# build.mjs destructures the size ladder inside a template literal.
+[n, sz, pr, note]
